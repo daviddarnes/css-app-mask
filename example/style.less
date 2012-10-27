@@ -1,0 +1,158 @@
+/*
+ * Name: CSS App Mask
+ * Author: David Darnes
+ * Author url: http://david.darn.es
+ * Tools: Made in Coda, Codekit and Less
+ * Usage: Just copy this file into your work folder,
+   wrap your png in something (most likely an a element)
+   and give it a class of 'app'. Simple.
+ */
+
+// Mixins stuff
+.backface-visibility(@visibility) {
+  -webkit-backface-visibility: @visibility;
+	 -moz-backface-visibility: @visibility;
+	  -ms-backface-visibility: @visibility;
+}
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+.border-top-left-radius(@radius) {
+-webkit-border-top-left-radius: @radius;
+   -moz-border-top-left-radius: @radius;
+   		border-top-left-radius: @radius;
+}
+.border-top-right-radius(@radius) {
+-webkit-border-top-right-radius: @radius;
+   -moz-border-top-right-radius: @radius;
+   		border-top-right-radius: @radius;
+}
+.border-bottom-left-radius(@radius) {
+-webkit-border-bottom-left-radius: @radius;
+   -moz-border-bottom-left-radius: @radius;
+   		border-bottom-left-radius: @radius;
+}
+.border-bottom-right-radius(@radius) {
+-webkit-border-bottom-right-radius: @radius;
+   -moz-border-bottom-right-radius: @radius;
+   		border-bottom-right-radius: @radius;
+}
+
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+.transition(@transition) {
+  -webkit-transition: @transition;
+     -moz-transition: @transition;
+      -ms-transition: @transition;
+       -o-transition: @transition;
+          transition: @transition;
+}
+.filter(@filter) {
+  -webkit-filter: @filter;
+     -moz-filter: @filter;
+      -ms-filter: @filter;
+       -o-filter: @filter;
+          filter: @filter;
+}
+
+.opacity(@opacity: 100) {
+  opacity: @opacity / 100;
+   filter: e(%("alpha(opacity=%d)", @opacity));
+}
+.gradient-vertical(@startColor: #555, @endColor: #333) {
+    background-color: mix(@startColor, @endColor, 60%);
+    background-image: -moz-linear-gradient(top, @startColor, @endColor); // FF 3.6+
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(top, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(top, @startColor, @endColor); // Opera 11.10
+    background-image: linear-gradient(to bottom, @startColor, @endColor); // Standard, IE10
+    background-repeat: repeat-x;
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+}
+
+/* Page specific styling for example page */
+body {
+	height: 100%;
+}
+
+section {
+	width: 302px;
+	margin: 150px auto;
+}
+
+a.logo {
+	opacity: 0.3;
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	background: url('logo.png');
+	background-size: 100% 100%;
+	width: 56px;
+	height: 57px;
+	.transition(all .2s ease-in-out);
+	&:hover {
+		opacity: 1;
+	}
+}
+
+// Mixin colours for less users
+@colour: #3382ca;
+@gloss: #fff;
+
+/* Image to be masked */
+img {
+	position: relative;
+	.filter(drop-shadow(0 0 30px darken(@colour, 30%)));
+}
+
+/* Masking element */
+.app {
+	display: block;
+	line-height: 0;
+	float: left;
+	position: relative;
+	.gradient-vertical(darken(@colour, 25%), @colour);
+	border: 1px solid @colour;
+	border-top: 1px solid fadeout(@gloss, 67%);
+	border-bottom: 1px solid darken(@colour, 5%);
+	.border-radius(20%);
+	overflow: hidden;
+	.box-shadow(~"0 2px 3px rgba(0,0,0,0.4), inset 0 -20px 60px rgba(255,255,255,0.2), inset 0 0 1px rgba(255,255,255,0.5)");
+	&:after {
+		content: "";
+		display: block;
+		width: 100%;
+		height: 49%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		.gradient-vertical(fadeout(@gloss, 40%), fadeout(@gloss, 100%));
+		.opacity(85);
+		.border-top-left-radius(20% 40%);
+		.border-top-right-radius(20% 40%);
+		.border-bottom-left-radius(50% 20%);
+		.border-bottom-right-radius(50% 20%);
+	}
+	&:active {
+		.gradient-vertical(darken(@colour, 35%), darken(@colour, 10%));
+		border: 1px solid darken(@colour, 10%);
+		border-top: 1px solid fadeout(@gloss, 77%);
+		border-bottom: 1px solid darken(@colour, 15%);
+	}
+}
+
+/* Page specific styling for example page */
+footer {
+	clear: both;
+	width: 600px;
+	margin: 0 auto;
+	padding-top: 50px;
+	padding-left: 30px;
+	text-align: center;
+}
