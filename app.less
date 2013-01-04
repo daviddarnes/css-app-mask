@@ -61,8 +61,8 @@
 }
 
 .opacity(@opacity: 100) {
-  opacity: @opacity / 100;
-   filter: e(%("alpha(opacity=%d)", @opacity));
+	opacity: @opacity / 100;
+	filter: e(%("alpha(opacity=%d)", @opacity));
 }
 .gradient-vertical(@startColor: #555, @endColor: #333) {
     background-color: mix(@startColor, @endColor, 60%);
@@ -80,7 +80,7 @@
 @gloss: #fff;
 
 /* Image to be masked */
-img {
+.app img {
 	position: relative;
 	.filter(drop-shadow(0 0 30px darken(@colour, 30%)));
 }

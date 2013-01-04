@@ -8,7 +8,7 @@
    and give it a class of 'app'. Simple.
  */
 /* Image to be masked */
-img {
+.app img {
   position: relative;
   -webkit-filter: drop-shadow(0 0 30px #143350);
   -moz-filter: drop-shadow(0 0 30px #143350);
