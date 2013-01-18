@@ -1,7 +1,7 @@
 CSS App Mask
 ============
 
-A mask to turn any transparent png into app icon, using CSS.
+A mask to turn any transparent png into app icon, using CSS
 --------------------
 
 Its as simple as that, bare in mind that in order to see it in its full potential you'll need a browser that supports webkit (specifically the new filter options).
