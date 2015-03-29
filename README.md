@@ -5,7 +5,7 @@ CSS App Mask
 
 Its as simple as that, bare in mind that in order to see it in its full potential you'll need a browser that supports webkit (specifically the new filter options).
 
-[Demo page](http://daviddarnes.github.io/css-app-mask/).
+[Demo page](http://daviddarnes.github.io/css-app-mask/)
 
 ### Usage
 
